@@ -2,21 +2,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'appEvent.dart';
 import 'appState.dart';
 
-class Appbloc extends Bloc<Appevent, Appstate> {
-  int nilai = 0;
+class AppBloc extends Bloc<AppEvent, AppState> {
+  AppBloc() : super(InitialState(0)) {
+    on<IncrementEvent>((event, emit) {
+      final currentState = state;
+      if (currentState is InitialState || currentState is UpdatedState) {
+        final newCounter = (currentState is InitialState ? currentState.counter : (currentState as UpdatedState).counter) + event.value;
+        emit(UpdatedState(newCounter));
+      }
+    });
 
-  Appbloc() : super(InitialState()) {
-    on<NumberIncrementEvent>(numberIncrementMethod);
-    on<NumberDecrementEvent>(numberDecrementMethod); // Handler untuk decrement
-  }
-
-  void numberIncrementMethod(NumberIncrementEvent event, Emitter<Appstate> emit) {
-    nilai = nilai + 1;
-    emit(UpdateState(nilai));
-  }
-
-  void numberDecrementMethod(NumberDecrementEvent event, Emitter<Appstate> emit) {
-    nilai = nilai - 1;
-    emit(UpdateState(nilai));
+    on<DecrementEvent>((event, emit) {
+      final currentState = state;
+      if (currentState is InitialState || currentState is UpdatedState) {
+        final newCounter = (currentState is InitialState ? currentState.counter : (currentState as UpdatedState).counter) - event.value;
+        emit(UpdatedState(newCounter));
+      }
+    });
   }
 }

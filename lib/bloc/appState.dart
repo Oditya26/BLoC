@@ -1,8 +1,11 @@
-abstract class Appstate {}
+abstract class AppState {}
 
-class InitialState extends Appstate {}
+class InitialState extends AppState {
+  final int counter;
+  InitialState(this.counter);
+}
 
-class UpdateState extends Appstate {
-  final int nilai;
-  UpdateState(this.nilai);
+class UpdatedState extends AppState {
+  final int counter;
+  UpdatedState(this.counter);
 }

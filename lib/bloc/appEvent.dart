@@ -1,5 +1,11 @@
-abstract class Appevent {}
+abstract class AppEvent {}
 
-class NumberIncrementEvent extends Appevent {}
+class IncrementEvent extends AppEvent {
+  final int value;
+  IncrementEvent(this.value);
+}
 
-class NumberDecrementEvent extends Appevent {} // Event baru
+class DecrementEvent extends AppEvent {
+  final int value;
+  DecrementEvent(this.value);
+}

@@ -1,7 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'bloc/appbloc.dart';
-import 'page/halaman1Page.dart';
-import 'package:flutter/material.dart';
+import 'page/mainPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,16 +12,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<Appbloc>(
-      create: (context) => Appbloc(),
+    return BlocProvider(
+      create: (context) => AppBloc(),
       child: MaterialApp(
+        title: "Increment/Decrement App",
         theme: ThemeData(
           useMaterial3: true,
         ),
-        routes: {
-          '/': (context) => const Halaman1Page(),
-        },
-        initialRoute: '/',
+        home: const MainPage(),
       ),
     );
   }
